@@ -16,7 +16,7 @@
                     <div class="settings-save-head">
                         <input type="submit" class="settings-save" value="<?php _e('Save Settings', 'gdgallery'); ?>"/>
                         <span class="spinner"></span>
-                        <p class="pro_save_message">This action is available in PRO version</p>
+                        <p class="pro_save_message"><?php echo _e('This action is available in PRO version', 'gdgallery'); ?></p>
                     </div>
                 </div>
 
@@ -29,9 +29,8 @@
                     <?php foreach ($tabs as $key => $tab): ?>
                         <li><a href="#<?= $key ?>"><?= $tab["title"] ?></a></li>
                     <?php endforeach; ?>
-                    <!--                    <a href="#" id="realtimepreview" data-enable="off">Real Time preview OFF</a>-->
                 </ul>
-                <div class="pro_message">These options are available in PRO version. Go PRO to open theme. <a href="#">Upgrade</a>
+                <div class="pro_message"><?php _e('These options are available in PRO version. Go PRO to open theme.', 'gdgallery'); ?> <a href="//grandwp.com/wordpress-photo-gallery" target="_blank"><?php _e('Upgrade', 'gdgallery'); ?></a>
                 </div>
                 <?php foreach ($tabs as $id => $tab): ?>
                     <?php \GDGallery\Helpers\View::render('admin/settings/styles.php', compact('sections', 'id', 'fields')); ?>
@@ -40,7 +39,7 @@
             <div class="settings-save-wrap">
                 <input type="submit" class="settings-save" value="<?php _e('Save Settings', 'gdgallery'); ?>"/>
                 <span class="spinner"></span>
-                <p class="pro_save_message">This action is available in PRO version</p>
+                <p class="pro_save_message"><?php echo _e('This action is available in PRO version', 'gdgallery'); ?></p>
             </div>
         </form>
 

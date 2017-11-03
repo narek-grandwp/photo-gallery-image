@@ -8,10 +8,10 @@
                 <a href="?page=gdgallery_settings"><?php _e('Settings', GDGALLERY_TEXT_DOMAIN); ?></a>
             </li>
             <li>
-                <a href=""><?php _e('Go Pro', GDGALLERY_TEXT_DOMAIN); ?></a>
+                <a href="//grandwp.com/wordpress-photo-gallery" target="_blank"><?php _e('Go Pro', GDGALLERY_TEXT_DOMAIN); ?></a>
             </li>
             <li>
-                <a href=""><?php _e('Help', GDGALLERY_TEXT_DOMAIN); ?></a>
+                <a href="//grandwp.com/grandwp-photo-gallery-user-manual" target="_blank"><?php _e('Help', GDGALLERY_TEXT_DOMAIN); ?></a>
             </li>
         </ul>
     </div>
