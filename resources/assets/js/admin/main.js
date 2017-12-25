@@ -490,7 +490,6 @@ jQuery(document).ready(function () {
             }
         }
         else if (type == "select") {
-            console.log(jQuery(from_section).val());
             if (jQuery.inArray(jQuery(from_section).val(), val_arr) !== -1) {
                 jQuery(to_section).removeClass("disabled");
             }

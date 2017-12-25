@@ -281,8 +281,6 @@ function UGTheme_tilesgrid() {
                 g_objNavWrapper.show();
 
                 var navX = g_objGridSize.left + g_functions.getElementRelativePos(g_objNavWrapper, g_options.theme_navigation_align, g_options.theme_navigation_offset_hor, gridElement);
-                console.log(g_objGridSize.left);
-                console.log(navX);
 
                 g_functions.placeElement(g_objNavWrapper, navX, galleryHeight + g_options.theme_arrows_margin_top);
 

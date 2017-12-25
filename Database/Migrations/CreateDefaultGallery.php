@@ -24,7 +24,7 @@ class CreateDefaultGallery
         $galleries = $wpdb->get_var("SELECT COUNT(*) FROM " . Gallery::getTableName());
         if ($galleries == 0) {
             $new_gallery = $wpdb->insert(Gallery::getTableName(), array("name" => "My First Gallery"));
-            for ($i = 1; $i < 14; $i++) {
+            for ($i = 1; $i < 12; $i++) {
                 $wpdb->insert(Gallery::getItemsTableName(), array(
                         "id_gallery" => $new_gallery,
                         "name" => "title " . $i,
