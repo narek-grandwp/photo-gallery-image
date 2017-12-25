@@ -9,12 +9,16 @@
 namespace GDGallery\Models;
 
 use GDGallery\Core\Model;
+use GDGallery\Models\Settings;
+use GDGallery\Debug;
 
 class Gallery extends Model
 {
     protected static $tableName = 'gdgallerygalleries';
 
     protected static $itemsTableName = 'gdgalleryimages';
+
+    protected static $individualSettingsTableName = 'gdgalleryindividualsettings';
 
     /**
      * Form Name
@@ -76,6 +80,11 @@ class Gallery extends Model
     public static function getItemsTableName()
     {
         return $GLOBALS['wpdb']->prefix . self::$itemsTableName;
+    }
+
+    public static function getIndividualSettingsTableName()
+    {
+        return $GLOBALS["wpdb"]->prefix . self::$individualSettingsTableName;
     }
 
 
@@ -208,6 +217,8 @@ class Gallery extends Model
             }
         }
 
+//        $items->total_count = $items_count;
+
         if (empty($items)) {
             return null;
         }
@@ -221,18 +232,22 @@ class Gallery extends Model
     {
         $gallery_data = (array)$this->getGallery(true);
         $gallery_items = (array)$this->getItems();
+        $gallery_settings = (array)$this->getGalleryIndSettings($gallery_data["id_gallery"]);
         unset($gallery_data["id_gallery"]);
         $gallery_data["name"] = $this->getName();
         array_walk($gallery_items, function ($item) {
             unset($item->id_image);
         });
+        array_walk($gallery_settings, function ($setting) {
+            unset($setting->id);
+        });
 
-        $id_gallery = $this->AddDuplicatedData($gallery_data, $gallery_items);
+        $id_gallery = $this->AddDuplicatedData($gallery_data, $gallery_items, $gallery_settings);
 
         return $id_gallery;
     }
 
-    public function AddDuplicatedData($gallery, $items)
+    public function AddDuplicatedData($gallery, $items, $settings)
     {
         global $wpdb;
 
@@ -245,6 +260,14 @@ class Gallery extends Model
         });
         foreach ($items as $item) {
             $wpdb->insert(self::getItemsTableName(), (array)$item);
+        }
+
+        array_walk($settings, function ($setting) use ($id_gallery) {
+            $setting->id_gallery = $id_gallery;
+        });
+
+        foreach ($settings as $setting) {
+            $wpdb->insert(self::getIndividualSettingsTableName(), (array)$setting);
         }
 
         return $id_gallery;
@@ -315,6 +338,69 @@ class Gallery extends Model
 
         return false;
     }
+
+    public function getIndSettingsList()
+    {
+        global $wpdb;
+
+        $query = "SELECT * FROM " . $wpdb->prefix . "gdgalleryindividualsettingslist";
+        $result = $wpdb->get_results($query);
+        $settings_list = array();
+        foreach ($result as $key => $val) {
+            $settings_list[$val->option_key] = $val->id;
+        }
+
+        return $settings_list;
+    }
+
+    public function getGalleryIndSettings($id)
+    {
+        global $wpdb;
+
+        $query = $wpdb->prepare("SELECT * FROM " . self::getIndividualSettingsTableName() . " WHERE id_gallery = %d", $id);
+        $result = $wpdb->get_results($query);
+
+
+        return $result;
+    }
+
+    public function deleteGalleryIndSettings($id)
+    {
+        global $wpdb;
+
+        return $wpdb->query("DELETE FROM " . static::getIndividualSettingsTableName() . " WHERE id_gallery ='" . $id . "'");
+    }
+
+
+    public function saveGalleryIndSettings($data, $id_gallery)
+    {
+        global $wpdb;
+
+        $settings_list = $this->getIndSettingsList();
+        $combined = array();
+
+        foreach ($data as $key => $val) {
+            foreach ($settings_list as $k => $v) {
+                if ($key == $k) {
+                    $combined[$v] = $val;
+                }
+            }
+        }
+
+
+        foreach ($combined as $key => $val) {
+            $wpdb->query("UPDATE " . static::getIndividualSettingsTableName() . " SET option_value = '" . $val . "' WHERE id_option = " . $key . " AND id_gallery = " . $id_gallery);
+        }
+
+        return true;
+
+        /*  if (false !== $result) {
+              return static::$primaryKey;
+          }
+
+          return false;*/
+    }
+
 
     public
     function saveGalleryImages($data)
@@ -423,11 +509,11 @@ class Gallery extends Model
     function setViewStyles()
     {
         $this->View_style = array(
-            array("Jastified", GDGALLERY_IMAGES_URL . "icons/view/jastified_gray.png"),
-            array("Tiles", GDGALLERY_IMAGES_URL . "icons/view/tiles_gray.png"),
-            array("Carousel", GDGALLERY_IMAGES_URL . "icons/view/carousel_gray.png"),
-            array("Slider", GDGALLERY_IMAGES_URL . "icons/view/slider_gray.png"),
-            array("Grid", GDGALLERY_IMAGES_URL . "icons/view/grid_gray.png")
+            array("Jastified", GDGALLERY_IMAGES_URL . "icons/view/justified", "0 -102px"),
+            array("Tiles", GDGALLERY_IMAGES_URL . "icons/view/tiles", "0 -99px"),
+            array("Carousel", GDGALLERY_IMAGES_URL . "icons/view/carousel", "0 -99px"),
+            array("Slider", GDGALLERY_IMAGES_URL . "icons/view/slider", "0 -94px"),
+            array("Grid", GDGALLERY_IMAGES_URL . "icons/view/grid", "0 -150px")
         );
 
     }
@@ -436,6 +522,19 @@ class Gallery extends Model
     function getViewStyles()
     {
         return $this->View_style;
+    }
+
+    public function getViewName($view_id)
+    {
+        $views_list = array(
+            "0" => "justified",
+            "1" => "tiles",
+            "2" => "carousel",
+            "3" => "slider",
+            "4" => "grid"
+        );
+
+        return $views_list[$view_id];
     }
 
     /**

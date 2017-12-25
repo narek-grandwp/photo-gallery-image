@@ -1,6 +1,16 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../../fonts/Roboto-regular.ttf);
+}
+
+@font-face {
+    font-family: Nunito;
+    src: url(../../fonts/Nunito-Regular.ttf);
+}
 
 body {
     background: #f3f4f8;
+    overflow-x: hidden;
 }
 
 .gdgallery_hidden {
@@ -220,19 +230,6 @@ body {
     padding: 5px 0 5px 15px;
     background: #fff;
     border: 2px solid #e0e0e0;
-}
-
-#gallery_name {
-    width: 90%;
-    color: #676767;
-    font-family: Nunito;
-    font-size: 25px;
-    font-weight: 300;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    background: transparent;
 }
 
 #gdgallery-new-gallery,
@@ -1122,7 +1119,7 @@ html .ui-button.ui-state-disabled:active {
     padding: 0 !important;
     width: 100% !important;
     border: none !important;
-    background: none !important;
+    background: #FFF !important;
 }
 
 .ui-tabs.ui-tabs-vertical .ui-widget-header {
@@ -1131,7 +1128,7 @@ html .ui-button.ui-state-disabled:active {
 
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav {
     border: none !important;
-    background: none !important;
+    background: #f3f4f8 !important;
     border-bottom: 4px solid #e9ebf3 !important;
     margin-bottom: 20px !important;
 }
@@ -1160,6 +1157,10 @@ html .ui-button.ui-state-disabled:active {
     padding: 12px 20px !important;
     font-size: 16px !important;
 }
+
+/*.ui-tabs.ui-tabs-vertical .ui-tabs-nav:first-child li a {
+    padding-left: 9px !important;
+}*/
 
 .ui-tabs.ui-tabs-vertical .ui-tabs-nav li a:hover {
     cursor: pointer !important;
@@ -1218,16 +1219,16 @@ html .ui-button.ui-state-disabled:active {
     position: absolute !important;
     top: 45px !important;
     left: 0;
-    width: 135px;
+    width: 156px;
     height: 4px;
-    background-color: #4A66F4;
+    background-color: #5f7df5;
     border-radius: 5px;
     -webkit-transition: left .25s;
     transition: left .25s;
 }
 
 .Tabs__presentation-slider:before {
-    background-color: #4A66F4;
+    background-color: #5f7df5;
 }
 
 /*.single_gallery_preview:hover {
@@ -1244,14 +1245,43 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .ui-tabs.ui-tabs-vertical .ui-tabs-panel .gdgallery_view_item {
-    width: 200px !important;
-    float: left !important;
+    width: 85px !important;
     text-align: center !important;
-    margin-bottom: 20px !important;
+}
+
+.ui-tabs.ui-tabs-vertical .ui-tabs-panel .gdgallery_view_item .view_icon {
+    height: 55px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50%;
 }
 
 .ui-tabs.ui-tabs-vertical .ui-tabs-panel .gdgallery_view_item input[type=radio] {
     position: absolute !important;
+}
+
+.choose_view {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.view_list {
+    float: left;
+    display: flex;
+    border: 1px solid #d8e1ec;
+    border-radius: 5px;
+    background-color: #f3f4f8;
+    padding: 15px;
+
+}
+
+.view_label {
+    float: left;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 0;
+    margin-right: 20px;
 }
 
 /*.checked_view p {
@@ -1323,18 +1353,24 @@ html .ui-button.ui-state-disabled:active {
 
 #gdgallery_general_settings ul li {
     display: block;
-    margin-bottom: 15px;
-    flex-basis: 49%;
+    flex-basis: 22%;
     width: 96%;
     background: #fff;
-    border: 2px solid #e0e0e0;
-
+    /*border: 2px solid #e0e0e0;*/
+    margin: 0 1.5% 15px 1.5%;
 }
 
 #gdgallery_edit_name {
     position: absolute;
     top: 0;
     right: 0;
+    border-radius: 50%;
+    background: #5f7df5;
+    padding: 2px 6px;
+    color: #fff;
+    top: -12px;
+    right: -12px;
+    font-size: 13px;
 }
 
 #edit_name_input {
@@ -1343,7 +1379,7 @@ html .ui-button.ui-state-disabled:active {
     outline: none;
     box-shadow: none;
     position: relative;
-    bottom: 8px;
+    bottom: 2px;
 }
 
 /*#gdgallery_general_settings ul li:nth-child(even) {
@@ -1476,19 +1512,23 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .gdgallery_item_overlay .gdgallery_item_edit {
-    margin-top: 20px;
-    text-align: center;
+    margin-top: 3px;
+    width: 27px;
+    float: right;
 }
 
 .gdgallery_item_overlay .gdgallery_item_edit a {
     text-decoration: none;
     color: #fff;
     background: #3a9c1a;
-    font-size: 15px;
-    padding: 5px 15px;
+    font-size: 13px;
+    padding: 5px 6px;
     border-radius: 4px;
     outline: none;
     box-shadow: none;
+    position: absolute;
+    right: 0;
+    top: -5px;
 }
 
 .gdgallery_item:hover .gdgallery_item_overlay {
@@ -1539,7 +1579,7 @@ html .ui-button.ui-state-disabled:active {
 
 .video_fields li input {
     width: 100%;
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
 }
 
 .video_save {
@@ -1589,6 +1629,14 @@ html .ui-button.ui-state-disabled:active {
 
 /*** custom radio ***/
 
+.view-icon-wrapper {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 40px;
+    /*padding: 26px;*/
+}
+
 label > input { /* HIDE RADIO */
     visibility: hidden; /* Makes input not-clickable */
     position: absolute; /* Remove input from document flow */
@@ -1597,6 +1645,7 @@ label > input { /* HIDE RADIO */
 label > input + img { /* IMAGE STYLES */
     cursor: pointer;
     border: 2px solid transparent;
+    width: 66px;
 }
 
 label > p {
@@ -1606,13 +1655,12 @@ label > p {
 }
 
 label > img {
-    padding: 5px;
+    padding: 7px;
 }
 
-label > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
-    border: 2px solid #5f7df5;
-    background-color: rgb(216, 223, 255);
-
+label > input:checked + img, .gdgallery_view_item:hover img { /* (RADIO CHECKED) IMAGE STYLES */
+    background-color: #5f7df5;
+    border-radius: 3px;
 }
 
 .gdgallery-save-buttom {
@@ -1622,7 +1670,7 @@ label > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
     box-shadow: none;
     color: #fff;
     padding: 6px 20px;
-    border-radius: 6px;
+    border-radius: 3px;
     border: 0px;
     font-size: 16px !important;
     cursor: pointer;
@@ -1657,11 +1705,13 @@ label > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
 
 .gdgallery_items_section, .gdgallery_items_list {
     margin-top: 5px;
+    background: #FFF;
+    min-height: 120px;
 }
 
 .quick_edit_table td input, .quick_edit_table td textarea,
 .gdgallery_items_section h3 {
-    max-width: 90%;
+    max-width: 99%;
     float: left;
 }
 
@@ -1734,7 +1784,7 @@ label > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
 ul.gdgallery_general_settings {
     display: flex !important;
     flex-wrap: wrap !important;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .quick_edit_table tr {
@@ -1750,10 +1800,10 @@ ul.gdgallery_general_settings {
 .switch_gallery {
     display: flex;
     margin: 0px;
-    padding: 80px 190px 0 30px;
+    padding: 60px 190px 0 30px;
     background-color: #FFF;
     border-bottom: 2px solid #e9ebf3;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .switch_gallery li {
@@ -1768,6 +1818,12 @@ ul.gdgallery_general_settings {
     text-decoration: none;
     font-size: 14px;
     box-shadow: none;
+    position: relative;
+    top: 0px;
+}
+
+.switch_gallery li.active_gallery a {
+    top: 0px;
 }
 
 .switch_gallery li:hover {
@@ -1844,6 +1900,11 @@ ul.gdgallery_general_settings {
 .gdgallery_general_settings li input[type=checkbox] {
     position: relative;
     top: 6px;
+}
+
+#wpbody-content *:not(i) {
+    /*font-family: Roboto;*/
+    /*font-family: Nunito;*/
 }
 
 @media all and (max-width: 626px) {

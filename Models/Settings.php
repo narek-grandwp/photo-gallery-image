@@ -2,11 +2,16 @@
 
 namespace GDGallery\Models;
 
+use GDGallery\Debug;
+use GDGallery\GDGallery;
+use GDGallery\Models\Gallery;
 
 class Settings
 {
 
     private $tableName;
+
+    private $individualOptionsListTable;
 
     /**
      * @var []
@@ -17,6 +22,7 @@ class Settings
     {
         global $wpdb;
         $this->tableName = $wpdb->prefix . 'gdgallerysettings';
+        $this->individualOptionsListTable = $wpdb->prefix . 'gdgalleryindividualsettingslist';
 
         $dbResults = $wpdb->get_results("SELECT * FROM `" . $this->tableName . "`", ARRAY_A);
 
@@ -53,26 +59,26 @@ class Settings
 
         /************* Justified ***********/
         'lightbox_type_justified' => 'wide',
-        'show_title_justified' => '0',
+//        'show_title_justified' => '0',
         'title_position_justified' => 'center',
         'title_vertical_position_justified' => 'inside_bottom',
-        'title_appear_type_justified' => 'slide',
+//        'title_appear_type_justified' => 'slide',
         'title_size_justified' => '16',
         'title_color_justified' => 'FFFFFF',
         'title_background_color_justified' => '333333',
         'title_background_opacity_justified' => '70',
-        'margin_justified' => '10',
-        'border_width_justified' => '0',
+//        'margin_justified' => '10',
+//        'border_width_justified' => '0',
         'border_color_justified' => '333333',
         'border_radius_justified' => '0',
-        'on_hover_overlay_justified' => 'b:1;',
+//        'on_hover_overlay_justified' => 'b:1;',
         'show_icons_justified' => 'b:1;',
         'show_link_icon_justified' => 'b:1;',
         'item_as_link_justified' => 'b:0;',
         'link_new_tab_justified' => 'b:1;',
-        'image_hover_effect_justified' => 'blur',
+//        'image_hover_effect_justified' => 'blur',
         'image_hover_effect_reverse_justified' => 'b:0;',
-        'shadow_justified' => 'b:0;',
+//        'shadow_justified' => 'b:0;',
         'load_more_text_justified' => 'Load More',
         'load_more_position_justified' => 'center',
         'load_more_font_size_justified' => '15',
@@ -111,29 +117,29 @@ class Settings
 
         /************* Tiles ***********/
         'lightbox_type_tiles' => 'wide',
-        'show_title_tiles' => '0',
+//        'show_title_tiles' => '0',
         'title_position_tiles' => 'center',
         'title_vertical_position_tiles' => 'inside_bottom',
 
-        'title_appear_type_tiles' => 'slide',
+//        'title_appear_type_tiles' => 'slide',
         'title_size_tiles' => '16',
         'title_color_tiles' => 'FFFFFF',
         'title_background_color_tiles' => '333333',
         'title_background_opacity_tiles' => '70',
-        'margin_tiles' => '10',
-        'col_width_tiles' => '250',
+//        'margin_tiles' => '10',
+//        'col_width_tiles' => '250',
         'min_col_tiles' => '2',
-        'border_width_tiles' => '0',
+//        'border_width_tiles' => '0',
         'border_color_tiles' => '333333',
         'border_radius_tiles' => '0',
-        'on_hover_overlay_tiles' => 'b:1;',
+//        'on_hover_overlay_tiles' => 'b:1;',
         'show_icons_tiles' => 'b:1;',
         'show_link_icon_tiles' => 'b:1;',
         'item_as_link_tiles' => 'b:0;',
         'link_new_tab_tiles' => 'b:1;',
-        'image_hover_effect_tiles' => 'blur',
+//        'image_hover_effect_tiles' => 'blur',
         'image_hover_effect_reverse_tiles' => 'b:0;',
-        'shadow_tiles' => 'b:0;',
+//        'shadow_tiles' => 'b:0;',
 
         'load_more_text_tiles' => 'Load More',
         'load_more_position_tiles' => 'center',
@@ -172,32 +178,32 @@ class Settings
 
         /************* Carousel ***********/
         'lightbox_type_carousel' => 'wide',
-        'show_title_carousel' => '0',
+//        'show_title_carousel' => '0',
         'title_position_carousel' => 'center',
         'title_vertical_position_carousel' => 'inside_bottom',
 
-        'title_appear_type_carousel' => 'slide',
+//        'title_appear_type_carousel' => 'slide',
         'title_size_carousel' => '16',
         'title_color_carousel' => 'FFFFFF',
         'title_background_color_carousel' => '333333',
         'title_background_opacity_carousel' => '70',
-        'width_carousel' => '200',
-        'height_carousel' => '200',
-        'margin_carousel' => '10',
+//        'width_carousel' => '200',
+//        'height_carousel' => '200',
+//        'margin_carousel' => '10',
         'position_carousel' => 'center',
         'show_background_carousel' => 'b:0;',
         'background_color_carousel' => 'FFFFFF',
-        'border_width_carousel' => '0',
+//        'border_width_carousel' => '0',
         'border_color_carousel' => '333333',
         'border_radius_carousel' => '0',
-        'on_hover_overlay_carousel' => 'b:1;',
+//        'on_hover_overlay_carousel' => 'b:1;',
         'show_icons_carousel' => 'b:1;',
         'show_link_icon_carousel' => 'b:1;',
         'item_as_link_carousel' => 'b:0;',
         'link_new_tab_carousel' => 'b:1;',
-        'image_hover_effect_carousel' => 'blur',
+//        'image_hover_effect_carousel' => 'blur',
         'image_hover_effect_reverse_carousel' => 'b:0;',
-        'shadow_carousel' => 'b:0;',
+//        'shadow_carousel' => 'b:0;',
 
         'nav_num_carousel' => '1',
         'scroll_duration_carousel' => '500',
@@ -214,33 +220,33 @@ class Settings
 
         /************* Grid ***********/
         'lightbox_type_grid' => 'wide',
-        'width_grid' => '200',
-        'height_grid' => '200',
-        'space_cols_grid' => '20',
+//        'width_grid' => '200',
+//        'height_grid' => '200',
+//        'space_cols_grid' => '20',
         'space_rows_grid' => '20',
         'gallery_width_grid' => '100',
         'gallery_bg_grid' => 'b:1;',
         'gallery_bg_color_grid' => 'FFFFFF',
         'num_rows_grid' => '3',
-        'show_title_grid' => '1',
+//        'show_title_grid' => '1',
         'title_position_grid' => 'left',
         'title_vertical_position_grid' => 'bottom',
-        'title_appear_type_grid' => 'slide',
+//        'title_appear_type_grid' => 'slide',
         'title_size_grid' => '16',
         'title_color_grid' => 'FFFFFF',
         'title_background_color_grid' => '333333',
         'title_background_opacity_grid' => '70',
-        'border_width_grid' => '1',
+//        'border_width_grid' => '1',
         'border_color_grid' => '333333',
         'border_radius_grid' => '3',
-        'on_hover_overlay_grid' => 'b:1;',
+//        'on_hover_overlay_grid' => 'b:1;',
         'show_icons_grid' => 'b:1;',
         'show_link_icon_grid' => 'b:1;',
         'item_as_link_grid' => 'b:0;',
         'link_new_tab_grid' => 'b:1;',
-        'image_hover_effect_grid' => 'blur',
+//        'image_hover_effect_grid' => 'blur',
         'image_hover_effect_reverse_grid' => 'b:0;',
-        'shadow_grid' => 'b:1;',
+//        'shadow_grid' => 'b:1;',
         'nav_type_grid' => 'bullets',
         'bullets_margin_grid' => '50',
         'bullets_color_grid' => 'gray',
@@ -251,14 +257,14 @@ class Settings
         'nav_offset_grid' => '0',
 
         /************* Slider ***********/
-        'width_slider' => '900',
-        'height_slider' => '500',
-        'autoplay_slider' => 'b:1;',
-        'play_interval_slider' => '5000',
+//        'width_slider' => '900',
+//        'height_slider' => '500',
+//        'autoplay_slider' => 'b:1;',
+//        'play_interval_slider' => '5000',
         'pause_on_hover_slider' => 'b:1;',
         'scale_mode_slider' => 'fill',
-        'transition_slider' => 'slide',
-        'transition_speed_slider' => '1500',
+//        'transition_slider' => 'slide',
+//        'transition_speed_slider' => '1500',
         'zoom_slider' => 'b:1;',
         'loader_type_slider' => '1',
         'loader_color_slider' => 'white',
@@ -293,7 +299,7 @@ class Settings
         'text_panel_title_color_slider' => 'FFFFFF',
         'text_panel_desc_size_slider' => '14',
         'text_panel_desc_color_slider' => 'FFFFFF',
-        'playlist_slider' => 'b:0;',
+//        'playlist_slider' => 'b:0;',
         'thumb_width_slider' => '88',
         'thumb_height_slider' => '50',
         'playlist_bg_slider' => '000000',
@@ -355,6 +361,60 @@ class Settings
 
     );
 
+
+    private $individualOptions = array(
+        "show_title_justified" => array("1", "Element Title Option", "select", "0,1,2", "Always on,On hover,Disable"),
+        "title_appear_type_justified" => array("slide", "Title On Hover Type", "select", "slide,fade", "Slide,Fade"),
+        "on_hover_overlay_justified" => array("b:1;", "On Hover Overlay", "checkbox", null, null),
+        "image_hover_effect_justified" => array("blur", "Image Hover Effect", "select", "blur,bw,sepia", "None,Black and White,Sepia"),
+        "margin_justified" => array("10", "Image Margin", "number", null, null),
+        "border_width_justified" => array("1", "Image Border Width", 'number', null, null),
+        "shadow_justified" => array("b:0;", "Image Element Shadow", "checkbox", null, null),
+
+        "show_title_tiles" => array("1", "Element Title Option", "select", "0,1,2", "Always on,On hover,Disable"),
+        "title_appear_type_tiles" => array("slide", "Title On Hover Type", "select", "slide,fade", "Slide,Fade"),
+        "on_hover_overlay_tiles" => array("b:1;", "On Hover Overlay", "checkbox", null, null),
+        "image_hover_effect_tiles" => array("blur", "Image Hover Effect", "select", "blur,bw,sepia", "None,Black and White,Sepia"),
+        "margin_tiles" => array("10", "Image Margin", "number", null, null),
+        "border_width_tiles" => array("1", "Image Border Width", 'number', null, null),
+        "shadow_tiles" => array("b:0;", "Image Element Shadow", "checkbox", null, null),
+        "col_width_tiles" => array("250", "Image Width", "number", null, null),
+
+        "show_title_carousel" => array("1", "Element Title Option", "select", "0,1,2", "Always on,On hover,Disable"),
+        "title_appear_type_carousel" => array("slide", "Title On Hover Type", "select", "slide,fade", "Slide,Fade"),
+        "on_hover_overlay_carousel" => array("b:1;", "On Hover Overlay", "checkbox", null, null),
+        "image_hover_effect_carousel" => array("blur", "Image Hover Effect", "select", "blur,bw,sepia", "None,Black and White,Sepia"),
+        "margin_carousel" => array("10", "Image Margin", "number", null, null),
+        "border_width_carousel" => array("1", "Image Border Width", 'number', null, null),
+        "shadow_carousel" => array("b:0;", "Image Element Shadow", "checkbox", null, null),
+        "width_carousel" => array("250", "Image Width", "number", null, null),
+        "height_carousel" => array("250", "Image Height", "number", null, null),
+
+        "show_title_grid" => array("1", "Element Title Option", "select", "0,1,2", "Always on,On hover,Disable"),
+        "title_appear_type_grid" => array("slide", "Title On Hover Type", "select", "slide,fade", "Slide,Fade"),
+        "on_hover_overlay_grid" => array("b:1;", "On Hover Overlay", "checkbox", null, null),
+        "image_hover_effect_grid" => array("blur", "Image Hover Effect", "select", "blur,bw,sepia", "None,Black and White,Sepia"),
+        "space_cols_grid" => array("10", "Image Margin", "number", null, null),
+        "border_width_grid" => array("1", "Image Border Width", 'number', null, null),
+        "shadow_grid" => array("b:0;", "Image Element Shadow", "checkbox", null, null),
+        "width_grid" => array("250", "Image Width", "number", null, null),
+        "height_grid" => array("250", "Image Height", "number", null, null),
+
+        "width_slider" => array("900", "Image Width", "number", null, null),
+        "height_slider" => array("500", "Image Height", "number", null, null),
+        "autoplay_slider" => array("b:1;", "Autoplay", "checkbox", null, null),
+        "play_interval_slider" => array("5000", "Autoplay Timeout (ms)", "number", null, null),
+        "transition_speed_slider" => array("1000", "Transition Speed (ms)", "number", null, null),
+        "transition_slider" => array("slide", "Effects", "select", "slide,fade", "Slide,Fade"),
+        "playlist_slider" => array("b:1;", "Playlist", "checkbox", null, null),
+        "playlist_pos_slider" => array("right", "Playlist Position", "select", "right,left,bottom,top", "Right,Left,Bottom,Top", null, null)
+    );
+
+    public function getIndividualOptions()
+    {
+        return $this->individualOptions;
+    }
+
     /**
      * @param string $key
      * @return mixed
@@ -394,39 +454,175 @@ class Settings
 
     }
 
+    public function setIndividualOptionFields($option_name, $option_value, $id_gallery, $id)
+    {
+        global $wpdb;
+
+        $option_name = sanitize_text_field($option_name);
+
+        $wpdb->insert($this->individualOptionsListTable, array(
+            "id" => $id,
+            "option_key" => $option_name,
+            "option_title" => $option_value[1],
+            "option_type" => $option_value[2],
+            "select_options_val" => $option_value[3],
+            "select_options_title" => $option_value[4],
+        ));
+
+
+        $this->setIndividualOptionValues($id_gallery, $id, $option_value[0]);
+
+
+    }
+
+    public function setIndividualOptionValues($id_gallery, $id_option, $option_value)
+    {
+        global $wpdb;
+
+
+        $option_value = sanitize_text_field($option_value);
+
+        $saved = $wpdb->insert(Gallery::getIndividualSettingsTableName(), array(
+            "id_gallery" => $id_gallery,
+            "id_option" => $id_option,
+            "option_value" => $option_value
+        ));
+
+        if ($saved !== false) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public function getOptionsByGalleryView($id_gallery, $view)
+    {
+        global $wpdb;
+
+        $query = $wpdb->prepare("SELECT * FROM " . Gallery::getIndividualSettingsTableName() . " AS t1 LEFT JOIN " . $this->individualOptionsListTable . "  AS t2
+        ON (t1.id_option = t2.id) 
+        WHERE t1.id_gallery = %d AND t2.option_key LIKE '%s'", $id_gallery, "%" . $view . "%");
+
+        $gallery_options = $wpdb->get_results($query);
+
+
+        if (empty($gallery_options)) {
+            return array();
+        }
+
+        foreach ($gallery_options as $key => $val) {
+            switch ($val->option_value) {
+                case "b:0;":
+                    $gallery_options[$key]->option_value = 0;
+                    break;
+                case "b:1;":
+                    $gallery_options[$key]->option_value = 1;
+                    break;
+            }
+        }
+
+        return $gallery_options;
+    }
+
+    public function getOptionsByKeyValue($arr)
+    {
+        $options = array();
+        foreach ($arr as $val) {
+            $options[$val->option_key] = $val->option_value;
+        }
+
+        return $options;
+    }
+
+    public function indOptions($id_gallery, $view)
+    {
+        $gallery_options = array();
+        $options_arr = $this->getOptionsByGalleryView($id_gallery, $view);
+        $options = $this->getOptionsByKeyValue($options_arr);
+
+        if ($view != "slider") {
+            if ($options["show_title_" . $view] == 0) {
+                $gallery_options["tile_enable_textpanel"] = true;
+                $gallery_options["tile_textpanel_always_on"] = true;
+            } elseif ($options["show_title_" . $view] == 1) {
+                $gallery_options["tile_enable_textpanel"] = true;
+            }
+            $gallery_options["tile_textpanel_appear_type"] = $options["title_appear_type_" . $view];
+            $gallery_options["tile_enable_overlay"] = $options["on_hover_overlay_" . $view];
+            $gallery_options["tile_image_effect_type"] = $options["image_hover_effect_" . $view];
+            $gallery_options["tile_border_width"] = $options["border_width_" . $view];
+            $gallery_options["tile_enable_shadow"] = $options["shadow_" . $view];
+
+
+            switch ($view) {
+                case "justified":
+                    $gallery_options["tiles_justified_space_between"] = (int)$options["margin_justified"];
+                    break;
+                case "tiles":
+                    $gallery_options["tiles_space_between_cols"] = (int)$options["margin_tiles"];
+                    $gallery_options["tiles_col_width"] = (int)$options["col_width_tiles"];
+                    break;
+                case "carousel":
+                    $gallery_options["carousel_space_between_tiles"] = (int)$options["margin_carousel"];
+                    $gallery_options["tile_width"] = (int)$options["width_carousel"];
+                    $gallery_options["tile_height"] = $options["height_carousel"];
+                    break;
+                case "grid":
+                    $gallery_options["grid_space_between_cols"] = (int)$options["space_cols_grid"];
+                    $gallery_options["tile_width"] = (int)$options["width_grid"];
+                    $gallery_options["tile_height"] = $options["height_grid"];
+                    break;
+
+            }
+        } elseif ($view == "slider") {
+            $gallery_options["gallery_width"] = $options["width_slider"];
+            $gallery_options["gallery_height"] = $options["height_slider"];
+            $gallery_options["gallery_autoplay"] = $options["autoplay_slider"];
+            $gallery_options["gallery_play_interval"] = $options["play_interval_slider"];
+            $gallery_options["slider_transition_speed"] = (int)$options["transition_speed_slider"];
+            $gallery_options["slider_transition"] = $options["transition_slider"];
+            $gallery_options["theme_panel_position"] = $options["playlist_pos_slider"];
+            $gallery_options["playlist_slider"] = $options["playlist_slider"];
+        }
+
+
+        return $gallery_options;
+    }
+
+
     public function getMatchedOptions($view)
     {
-        if ($this->options["show_title_" . $view] == 0) {
-            $gallery_options["tile_enable_textpanel"] = true;
-            $gallery_options["tile_textpanel_always_on"] = true;
-        } elseif ($this->options["show_title_" . $view] == 1) {
-            $gallery_options["tile_enable_textpanel"] = true;
-        }
+        /* if ($this->options["show_title_" . $view] == 0) {
+             $gallery_options["tile_enable_textpanel"] = true;
+             $gallery_options["tile_textpanel_always_on"] = true;
+         } elseif ($this->options["show_title_" . $view] == 1) {
+             $gallery_options["tile_enable_textpanel"] = true;
+         }*/
         $gallery_options["tile_textpanel_title_text_align"] = $this->options["title_position_" . $view];
         $gallery_options["tile_textpanel_title_font_size"] = $this->options["title_size_" . $view];
         $gallery_options["tile_textpanel_title_color"] = "#" . $this->options["title_color_" . $view];
         $gallery_options["tile_textpanel_bg_color"] = "#" . $this->options["title_background_color_" . $view];
         $gallery_options["tile_textpanel_bg_opacity"] = $this->options["title_background_opacity_" . $view] / 100;
         $gallery_options["tile_enable_border"] = true;
-        $gallery_options["tile_border_width"] = $this->options["border_width_" . $view];
+//        $gallery_options["tile_border_width"] = $this->options["border_width_" . $view];
         $gallery_options["tile_border_color"] = "#" . $this->options["border_color_" . $view];
         $gallery_options["tile_border_radius"] = $this->options["border_radius_" . $view];
-        $gallery_options["tile_enable_overlay"] = $this->options["on_hover_overlay_" . $view];
+        //  $gallery_options["tile_enable_overlay"] = $this->options["on_hover_overlay_" . $view];
         $gallery_options["tile_enable_image_effect"] = true;
-        $gallery_options["tile_image_effect_type"] = $this->options["image_hover_effect_" . $view];
+        // $gallery_options["tile_image_effect_type"] = $this->options["image_hover_effect_" . $view];
         $gallery_options["tile_image_effect_reverse"] = ($this->options["image_hover_effect_reverse_" . $view] === true) ? false : true;
-        $gallery_options["tile_enable_shadow"] = $this->options["shadow_" . $view];
+//        $gallery_options["tile_enable_shadow"] = $this->options["shadow_" . $view];
 
         if ($this->options["item_as_link_" . $view] == true) {
-            $gallery_options["tile_as_link"] = true;
+            $gallery_options["tile_as_link"] = 1;
             $gallery_options["tile_enable_icons"] = ($this->options["show_link_icon_" . $view] == true) ? true : false;
         } else {
-            $gallery_options["tile_as_link"] = false;
+            $gallery_options["tile_as_link"] = 0;
             $gallery_options["tile_enable_icons"] = $this->options["show_icons_" . $view];
             $gallery_options["tile_show_link_icon"] = $this->options["show_link_icon_" . $view];
         }
 
-        $gallery_options["tile_textpanel_appear_type"] = $this->options["title_appear_type_" . $view];
+        //$gallery_options["tile_textpanel_appear_type"] = $this->options["title_appear_type_" . $view];
         $gallery_options["tile_textpanel_position"] = $this->options["title_vertical_position_" . $view];
         $gallery_options["tile_link_newpage"] = $this->options["link_new_tab_" . $view];
 
@@ -478,7 +674,7 @@ class Settings
     public function getOptionsJustified()
     {
         $gallery_options["tiles_type"] = 'justified';
-        $gallery_options["tiles_justified_space_between"] = (int)$this->options["margin_justified"];
+        //  $gallery_options["tiles_justified_space_between"] = (int)$this->options["margin_justified"];
 
         return $gallery_options;
     }
@@ -490,8 +686,8 @@ class Settings
 
     public function getOptionsTiles()
     {
-        $gallery_options["tiles_space_between_cols"] = (int)$this->options["margin_tiles"];
-        $gallery_options["tiles_col_width"] = (int)$this->options["col_width_tiles"];
+//        $gallery_options["tiles_space_between_cols"] = (int)$this->options["margin_tiles"];
+//        $gallery_options["tiles_col_width"] = (int)$this->options["col_width_tiles"];
         $gallery_options["tiles_min_columns"] = $this->options["min_col_tiles"];
 
         return $gallery_options;
@@ -508,9 +704,9 @@ class Settings
             $gallery_options["gallery_background_color"] = "#" . $this->options["background_color_carousel"];
         }
 
-        $gallery_options["carousel_space_between_tiles"] = (int)$this->options["margin_carousel"];
-        $gallery_options["tile_width"] = (int)$this->options["width_carousel"];
-        $gallery_options["tile_height"] = $this->options["height_carousel"];
+//        $gallery_options["carousel_space_between_tiles"] = (int)$this->options["margin_carousel"];
+//        $gallery_options["tile_width"] = (int)$this->options["width_carousel"];
+//        $gallery_options["tile_height"] = $this->options["height_carousel"];
         $gallery_options["tile_enable_outline"] = false;
         $gallery_options["theme_carousel_align"] = $this->options["position_carousel"];
         $gallery_options["carousel_navigation_numtiles"] = (int)$this->options["nav_num_carousel"];
@@ -535,9 +731,9 @@ class Settings
 
     public function getOptionsGrid()
     {
-        $gallery_options["tile_width"] = (int)$this->options["width_grid"];
-        $gallery_options["tile_height"] = (int)$this->options["height_grid"];
-        $gallery_options["grid_space_between_cols"] = (int)$this->options["space_cols_grid"];
+//        $gallery_options["tile_width"] = (int)$this->options["width_grid"];
+//        $gallery_options["tile_height"] = (int)$this->options["height_grid"];
+//        $gallery_options["grid_space_between_cols"] = (int)$this->options["space_cols_grid"];
         $gallery_options["grid_space_between_rows"] = (int)$this->options["space_rows_grid"];
         $gallery_options["gallery_width"] = $this->options["gallery_width_grid"] . "%";
         if ($this->options["gallery_bg_grid"] == 1) {

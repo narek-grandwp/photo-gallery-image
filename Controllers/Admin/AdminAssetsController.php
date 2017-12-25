@@ -37,6 +37,7 @@ class AdminAssetsController
 
         if ($hook === \GDGallery()->admin->Pages['main_page'] || $hook === \GDGallery()->admin->Pages['settings']) {
             wp_enqueue_style('gdgalleryAdminStyles', \GDGallery()->pluginUrl() . '/resources/assets/css/admin/main.css');
+            wp_enqueue_style('gdgalleryAdminMaterial', \GDGallery()->pluginUrl() . '/resources/assets/css/admin/material_components.css');
         }
 
         if ($hook == \GDGallery()->admin->Pages["main_page"]) {

@@ -64,6 +64,7 @@ class FrontendAssetsController
         $data = $gallery->getGallery();
         $view = null;
         $options = array();
+        $individuals = array();
         if ($data->view_type == 0) {
             $view = "justified";
         } elseif ($data->view_type == 1) {
@@ -72,10 +73,11 @@ class FrontendAssetsController
 
         if (!is_null($view)) {
             $options = \GDGallery()->settings->getOptionsByView($view);
+            $individuals = GDGallery()->settings->indOptions($id, $view);
         }
 
         wp_localize_script('gdgalleryFrontJs', 'mainjs', array(
-            'options' => $options
+            'options' => $options + $individuals
         ));
     }
 

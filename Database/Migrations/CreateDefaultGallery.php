@@ -10,9 +10,13 @@
 namespace GDGallery\Database\Migrations;
 
 use GDGallery\Models\Gallery as Gallery;
+use GDGallery\Models\Settings as Settings;
 
 class CreateDefaultGallery
 {
+
+    private static $defGallerySettings = array();
+
     public static function run()
     {
         global $wpdb;
@@ -23,10 +27,16 @@ class CreateDefaultGallery
             for ($i = 1; $i < 14; $i++) {
                 $wpdb->insert(Gallery::getItemsTableName(), array(
                         "id_gallery" => $new_gallery,
-                        "name" => $i,
+                        "name" => "title " . $i,
                         "ordering" => $i,
                         "url" => GDGALLERY_IMAGES_URL . "project/" . $i . ".jpg")
                 );
+            }
+            GDGallery()->setIndividualGallerySettings($new_gallery);
+        } else {
+            $gallery_arr = $wpdb->get_results("SELECT `id_gallery` FROM " . Gallery::getTableName());
+            foreach ($gallery_arr as $key => $val) {
+                GDGallery()->setIndividualGallerySettings($val->id_gallery);
             }
         }
     }

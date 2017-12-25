@@ -2,7 +2,11 @@
 
 $gallery_options = array();
 $gallery_options = GDGallery()->settings->getOptionsByView("grid");
-$json = json_encode($gallery_options);
+
+$individuals = GDGallery()->settings->indOptions($gallery_data->id_gallery, "grid");
+$merged = $gallery_options + $individuals;
+
+$json = json_encode($merged);
 
 wp_enqueue_script("gdgallerygrid", \GDGallery()->pluginUrl() . "/resources/assets/js/frontend/ug-theme-tilesgrid.js", array('jquery'), false, true);
 

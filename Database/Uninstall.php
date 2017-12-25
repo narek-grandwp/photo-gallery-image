@@ -20,6 +20,8 @@ class Uninstall
 
         $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "gdgallerysettings`");
         $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "gdgalleryimages`");
+        $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "gdgalleryindividualsettings`");
+        $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "gdgalleryindividualsettingslist`");
         $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "gdgallerygalleries`");
     }
 }

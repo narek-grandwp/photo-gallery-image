@@ -34,24 +34,40 @@
                                     <img src="<?= $item->url ?>">
                                 </td>
                                 <td>
-                                    <label for="gdgallery_images_name[<?= $item->id_image ?>]"> <?= _e('Name', 'gdgallery'); ?>
-                                        :</label>
-                                    <input type="text" id="gdgallery_images_name[<?= $item->id_image ?>]"
-                                           name="gdgallery_images_name[<?= $item->id_image ?>]"
-                                           value="<?= $item->name ?>">
+
+                                    <div class="group_material">
+                                        <input type="text" name="gdgallery_images_name[<?= $item->id_image ?>]"
+                                               id="gdgallery_images_name[<?= $item->id_image ?>]"
+                                               value="<?= $item->name ?>">
+                                        <span class="highlight_material"></span>
+                                        <span class="bar_material"></span>
+                                        <label><?= _e('Name', 'gdgallery'); ?></label>
+                                    </div>
+
+
                                 </td>
-                                <td><label for="gdgallery_images_description[<?= $item->id_image ?>]">
-                                        <?= _e('Description', 'gdgallery'); ?>
-                                        : </label>
-                                    <input type="text" id="gdgallery_images_description[<?= $item->id_image ?>]"
-                                           name="gdgallery_images_description[<?= $item->id_image ?>]"
-                                           value="<?= $item->description ?>"></td>
                                 <td>
-                                    <label for="gdgallery_images_link[<?= $item->id_image ?>]"><?= _e('Link', 'gdgallery'); ?>
-                                        :</label>
-                                    <input type="text" name="gdgallery_images_link[<?= $item->id_image ?>]"
-                                           id="gdgallery_images_link[<?= $item->id_image ?>]"
-                                           value="<?= $item->link ?>">
+
+                                    <div class="group_material">
+                                        <input type="text" name="gdgallery_images_description[<?= $item->id_image ?>]"
+                                               id="gdgallery_images_description[<?= $item->id_image ?>]"
+                                               value="<?= $item->description ?>">
+                                        <span class="highlight_material"></span>
+                                        <span class="bar_material"></span>
+                                        <label><?= _e('Description', 'gdgallery'); ?></label>
+                                    </div>
+
+                                </td>
+                                <td>
+
+                                    <div class="group_material">
+                                        <input type="text" name="gdgallery_images_link[<?= $item->id_image ?>]"
+                                               id="gdgallery_images_link[<?= $item->id_image ?>]"
+                                               value="<?= $item->link ?>">
+                                        <span class="highlight_material"></span>
+                                        <span class="bar_material"></span>
+                                        <label><?= _e('Link', 'gdgallery'); ?></label>
+                                    </div>
                                 </td>
                                
                             </tr>

@@ -29,7 +29,6 @@ class ShortcodeController
     {
         ob_start();
 
-
         $gallery = new Gallery(array('id_gallery' => $id));
 
         View::render('frontend/gallery.php', array('gallery' => $gallery));

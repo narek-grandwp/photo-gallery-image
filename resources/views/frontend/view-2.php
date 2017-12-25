@@ -6,7 +6,11 @@
 
 $gallery_options = array();
 $gallery_options = GDGallery()->settings->getOptionsByView("carousel");
-$json = json_encode($gallery_options);
+
+$individuals = GDGallery()->settings->indOptions($gallery_data->id_gallery, "carousel");
+$merged = $gallery_options + $individuals;
+
+$json = json_encode($merged);
 
 wp_enqueue_script("gdgallerycarousel", \GDGallery()->pluginUrl() . "/resources/assets/js/frontend/ug-theme-carousel.js", array('jquery'), false, true);
 ?>

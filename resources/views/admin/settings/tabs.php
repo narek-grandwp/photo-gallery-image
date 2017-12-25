@@ -30,7 +30,9 @@
                         <li><a href="#<?= $key ?>"><?= $tab["title"] ?></a></li>
                     <?php endforeach; ?>
                 </ul>
-                <div class="pro_message"><?php _e('These options are available in PRO version. Go PRO to open theme.', 'gdgallery'); ?> <a href="//grandwp.com/wordpress-photo-gallery" target="_blank"><?php _e('Upgrade', 'gdgallery'); ?></a>
+                <div class="pro_message"><?php _e('These options are available in PRO version. Go PRO to unlock them.', 'gdgallery'); ?>
+                    <a href="//grandwp.com/wordpress-photo-gallery"
+                       target="_blank"><?php _e('Upgrade', 'gdgallery'); ?></a>
                 </div>
                 <?php foreach ($tabs as $id => $tab): ?>
                     <?php \GDGallery\Helpers\View::render('admin/settings/styles.php', compact('sections', 'id', 'fields')); ?>

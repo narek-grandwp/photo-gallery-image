@@ -12,7 +12,14 @@ $page_options = array(
 
 $gallery_options = array();
 $gallery_options = GDGallery()->settings->getOptionsByView("tiles");
-$json = json_encode($gallery_options);
+
+$individuals = GDGallery()->settings->indOptions($gallery_data->id_gallery, "tiles");
+$merged = $individuals + $gallery_options;
+
+//$merged["tiles_type"] = "nested";
+
+
+$json = json_encode($merged);
 
 wp_enqueue_script("gdgallerytiles", \GDGallery()->pluginUrl() . "/resources/assets/js/frontend/ug-theme-tiles.js", array('jquery'), false, true);
 ?>
@@ -33,6 +40,7 @@ wp_enqueue_script("gdgallerytiles", \GDGallery()->pluginUrl() . "/resources/asse
     <?php endforeach; ?>
 </div>
 <?php
+if ($gallery_data->items_per_page < $items_count) {
 if ($gallery_data->display_type == 2) {
     \GDGallery\Helpers\View::render('frontend/pagination.php', compact('gallery_data', 'images', 'page_options'));
 } elseif ($gallery_data->display_type == 1) {
@@ -50,6 +58,7 @@ if ($gallery_data->display_type == 2) {
         <?php endif; ?>
     </div>
     <?php
+    }
 } ?>
 
 <script type="text/javascript">

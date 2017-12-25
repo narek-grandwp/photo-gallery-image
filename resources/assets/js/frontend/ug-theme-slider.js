@@ -2,7 +2,9 @@
 if(typeof g_ugFunctions != "undefined")
 	g_ugFunctions.registerTheme("slider");
 else 
-	jQuery(document).ready(function(){g_ugFunctions.registerTheme("slider")});
+    jQuery(document).ready(function () {
+        g_ugFunctions.registerTheme("slider")
+    });
 
 
 /**
@@ -17,9 +19,9 @@ function UGTheme_slider(){
 	
 	
 	//theme options
-	var g_options = {
-		
-	};
+    var g_options = {};
+
+
 	
 	
 	var g_defaults = {
@@ -28,7 +30,7 @@ function UGTheme_slider(){
 		slider_scale_mode:"fill",
 		slider_controls_always_on:true,
 		slider_enable_text_panel:false,
-		slider_controls_appear_ontap: true,			//appear controls on tap event on touch devices			
+        slider_controls_appear_ontap: false,			//appear controls on tap event on touch devices
 		slider_enable_bullets: true,
 		slider_enable_arrows: true,
 		slider_enable_play_button: false,

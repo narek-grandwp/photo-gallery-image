@@ -59,6 +59,68 @@ jQuery(document).ready(function () {
     }, 0);
 
 
+    jQuery(".view_list img").hover(function () {
+        if (!jQuery(this).parent().find("input[type=radio]").is(':checked')) {
+            var h_icon = jQuery(this).parent().find(".hidden_icon_hover").val();
+            jQuery(this).attr("src", h_icon);
+        }
+    }, function () {
+        if (!jQuery(this).parent().find("input[type=radio]").is(':checked')) {
+            var d_icon = jQuery(this).parent().find(".hidden_icon").val();
+            jQuery(this).attr("src", d_icon);
+        }
+    });
+
+    jQuery(".view_list input").on("change", function () {
+        jQuery(".view_list img").each(function (k, i) {
+            var img = jQuery(this).parent().find(".hidden_icon").val();
+            jQuery(this).attr("src", img);
+        });
+        if (jQuery(this).is(':checked')) {
+            var hover_img = jQuery(this).parent().find(".hidden_icon_hover").val();
+            jQuery(this).parent().find("img").attr("src", hover_img);
+        }
+    })
+
+    jQuery("input[name=gdgallery_view_type]").on("change", function () {
+        jQuery(".section_individual").addClass("gdgallery_hidden");
+        switch (jQuery(this).val()) {
+            case 0:
+                jQuery(".justified_section_ind").removeClass("gdgallery_hidden");
+                break;
+            case 1:
+                jQuery(".tiles_section_ind").removeClass("gdgallery_hidden");
+                break;
+            case 2:
+                jQuery(".carousel_section_ind").removeClass("gdgallery_hidden");
+                break;
+            case 3:
+                jQuery(".slider_section_ind").removeClass("gdgallery_hidden");
+                break;
+            case 4:
+                jQuery(".grid_section_ind").removeClass("gdgallery_hidden");
+                break;
+        }
+
+        if (jQuery(this).val() == 0) {
+            jQuery(".justified_section_ind").removeClass("gdgallery_hidden");
+        }
+        else if (jQuery(this).val() == 1) {
+            jQuery(".tiles_section_ind").removeClass("gdgallery_hidden");
+        }
+        if (jQuery(this).val() == 2) {
+            jQuery(".carousel_section_ind").removeClass("gdgallery_hidden");
+        }
+        if (jQuery(this).val() == 3) {
+            jQuery(".slider_section_ind").removeClass("gdgallery_hidden");
+        }
+        if (jQuery(this).val() == 4) {
+            jQuery(".grid_section_ind").removeClass("gdgallery_hidden");
+        }
+
+    })
+
+
     /* remove,read checked forms */
 
     jQuery(document).on('change', '.switch-checkbox.mask-switch', function () {
@@ -322,19 +384,18 @@ jQuery(document).ready(function () {
 
     jQuery(".gdgallery_item_overlay input[type=checkbox]").change(function () {
         if (jQuery(this).is(':checked')) {
-            /* jQuery(this).parent().parent().css({
-             "border": "2px solid #2279e0"
-             });*/
-            jQuery(this).parent().addClass("active_item");
+            jQuery(this).parent().parent().addClass("active_item");
         }
         else {
-            /*jQuery(this).parent().parent().css({
-             "border": "0px"
-             });*/
-            jQuery(this).parent().removeClass("active_item");
-
+            jQuery(this).parent().parent().removeClass("active_item");
         }
     })
+
+    jQuery(".group_material input[type=text]").bind("keypress keyup", function () {
+
+        this.setAttribute('value', this.value);
+
+    });
 
 
     jQuery(".gdgallery_remove_selected_images").click(function (e) {
@@ -381,6 +442,64 @@ jQuery(document).ready(function () {
 
 
     });
+
+
+    ///////    disabled sections
+    jQuery("#gdgallery_show_title").on("change", function () {
+        disableSection("#gdgallery_show_title", "checkbox", ".gdgallery_title_position_section");
+    });
+    jQuery("#gdgallery_display_type").on("change", function () {
+        disableSection("#gdgallery_display_type", "select", ".gdgallery_items_per_page_section", ["1", "2"]);
+    });
+    jQuery("#ind_setting_show_title_justified").on("change", function () {
+        disableSection("#ind_setting_show_title_justified", "select", "#ind_setting_title_appear_type_justified_section", ["1"]);
+    });
+    jQuery("#ind_setting_show_title_tiles").on("change", function () {
+        disableSection("#ind_setting_show_title_tiles", "select", "#ind_setting_title_appear_type_tiles_section", ["1"]);
+    });
+    jQuery("#ind_setting_show_title_carousel").on("change", function () {
+        disableSection("#ind_setting_show_title_carousel", "select", "#ind_setting_title_appear_type_carousel_section", ["1"]);
+    });
+    jQuery("#option-no-35").on("change", function () {
+        disableSection("#option-no-35", "checkbox", "#ind_setting_play_interval_slider_section");
+    });
+    jQuery("#option-no-39").on("change", function () {
+        disableSection("#option-no-39", "checkbox", "#ind_setting_playlist_pos_slider_section");
+    });
+    jQuery("#ind_setting_show_title_grid").on("change", function () {
+        disableSection("#ind_setting_show_title_grid", "select", "#ind_setting_title_appear_type_grid_section", ["1"]);
+    });
+
+    disableSection("#gdgallery_show_title", "checkbox", ".gdgallery_title_position_section");
+    disableSection("#gdgallery_display_type", "select", ".gdgallery_items_per_page_section", ["1", "2"]);
+    disableSection("#ind_setting_show_title_justified", "select", "#ind_setting_title_appear_type_justified_section", ["1"]);
+    disableSection("#ind_setting_show_title_tiles", "select", "#ind_setting_title_appear_type_tiles_section", ["1"]);
+    disableSection("#ind_setting_show_title_carousel", "select", "#ind_setting_title_appear_type_carousel_section", ["1"]);
+    disableSection("#option-no-35", "checkbox", "#ind_setting_play_interval_slider_section");
+    disableSection("#option-no-39", "checkbox", "#ind_setting_playlist_pos_slider_section");
+    disableSection("#ind_setting_show_title_grid", "select", "#ind_setting_title_appear_type_grid_section", ["1"]);
+
+
+    function disableSection(from_section, type, to_section, val_arr) {
+        if (type == "checkbox") {
+            if (jQuery(from_section).attr('checked')) {
+                jQuery(to_section).removeClass("disabled");
+            }
+            else {
+                jQuery(to_section).addClass("disabled");
+            }
+        }
+        else if (type == "select") {
+            console.log(jQuery(from_section).val());
+            if (jQuery.inArray(jQuery(from_section).val(), val_arr) !== -1) {
+                jQuery(to_section).removeClass("disabled");
+            }
+            else {
+                jQuery(to_section).addClass("disabled");
+            }
+        }
+    }
+
 
     jQuery(".items_checkbox").change(function () {
         var count = jQuery(".gdgallery_item input:checked").length;
@@ -456,31 +575,12 @@ jQuery(document).ready(function ($) {
         placeholder: 'gdgallery_item'
     }).disableSelection();
 
-    jQuery("#gdgallery_display_type").change(function () {
-        if (jQuery(this).val() == 0) {
-            jQuery(".gdgallery_items_per_page_section").addClass("gdgallery_hidden");
-        }
-        else {
-            jQuery(".gdgallery_items_per_page_section").removeClass("gdgallery_hidden");
-        }
-    });
-
-    jQuery("#gdgallery_show_title").change(function () {
-        if (!jQuery(this).is(':checked')) {
-            jQuery(".gdgallery_title_position_section").addClass("gdgallery_hidden");
-        }
-        else {
-            jQuery(".gdgallery_title_position_section").removeClass("gdgallery_hidden");
-        }
-    });
 
     jQuery("input[name=gdgallery_view_type]").change(function () {
         var grid_arr = ['0', '1'];
         if (jQuery.inArray(jQuery(this).val(), grid_arr) !== -1) {
             jQuery(".gdgallery_display_type_section").removeClass("gdgallery_hidden");
-            if (jQuery(".gdgallery_display_type_section").val() !== 0) {
-                jQuery(".gdgallery_items_per_page_section").removeClass("gdgallery_hidden");
-            }
+            jQuery(".gdgallery_items_per_page_section").removeClass("gdgallery_hidden");
         }
         else {
             jQuery(".gdgallery_display_type_section").addClass("gdgallery_hidden");
@@ -618,6 +718,8 @@ function copyToClipboard(elementId) {
     document.execCommand("copy");
 
     document.body.removeChild(aux);
+
+    toastr.success('Shortcode Copied');
 
 }
 

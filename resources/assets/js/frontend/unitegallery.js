@@ -11264,7 +11264,7 @@ function UGTileDesign() {
                 }
             }
             else {
-                objThumbWrapper.addClass("ug-tile-clickable");
+                //objThumbWrapper.addClass("ug-tile-clickable");
             }
 
             var toSaparateIcon = g_temp.isSaparateIcons;
@@ -12955,7 +12955,7 @@ function UGSlider() {
         slider_zoompanel_mobilehide: false,		     //hide the zoom panel on mobile
 
         slider_controls_always_on: false,				//true,false - controls are always on, false - show only on mouseover
-        slider_controls_appear_ontap: true,			//true,false - appear controls on tap event on touch devices
+        slider_controls_appear_ontap: false,			//true,false - appear controls on tap event on touch devices
         slider_controls_appear_duration: 300,			//the duration of appearing controls
 
         slider_enable_text_panel: true,				//true,false - enable the text panel

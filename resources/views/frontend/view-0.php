@@ -12,7 +12,11 @@ $page_options = array(
 
 $gallery_options = array();
 $gallery_options = GDGallery()->settings->getOptionsByView("justified");
-$json = json_encode($gallery_options);
+$individuals = GDGallery()->settings->indOptions($gallery_data->id_gallery, "justified");
+
+$merged = $gallery_options + $individuals;
+
+$json = json_encode($merged);
 
 wp_enqueue_script("gdgalleryjustified", \GDGallery()->pluginUrl() . "/resources/assets/js/frontend/ug-theme-tiles.js", array('jquery'), false, true);
 ?>
@@ -34,6 +38,7 @@ wp_enqueue_script("gdgalleryjustified", \GDGallery()->pluginUrl() . "/resources/
 </div>
 
 <?php
+if ($gallery_data->items_per_page < $items_count) {
 if ($gallery_data->display_type == 2) {
     \GDGallery\Helpers\View::render('frontend/pagination.php', compact('gallery_data', 'images', 'page_options'));
 } elseif ($gallery_data->display_type == 1) {
@@ -51,7 +56,8 @@ if ($gallery_data->display_type == 2) {
             </ul>
         <?php endif; ?>
     </div>
-<?php } ?>
+<?php } 
+} ?>
 
 
 <script type="text/javascript">

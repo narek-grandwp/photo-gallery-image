@@ -18,29 +18,46 @@
                 <input type="hidden" name="gdgallery_id_gallery" value="<?= $id_gallery ?>">
                 <ul class="video_fields">
 
-                    <li><label for="gdgallery_video_url"><?= _e('Video URL (Youtube or Vimeo)', 'gdgallery'); ?>
-                            :</label><br>
-                        <input type="text" id="gdgallery_video_url"
-                               name="gdgallery_video_url"
-                               value="" required>
+                    <li>
+                        <div class="group_material">
+                            <input type="text" name="gdgallery_video_url" id="gdgallery_video_url" required
+                                   value="">
+                            <span class="highlight_material"></span>
+                            <span class="bar_material"></span>
+                            <label><?= _e('Video URL (Youtube or Vimeo)', 'gdgallery'); ?></label>
+                        </div>
                     </li>
 
-                    <li><label for="gdgallery_video_name"> <?= _e('Title', 'gdgallery'); ?>:</label><br>
-                        <input type="text" id="gdgallery_video_name"
-                               name="gdgallery_video_name"
-                               value="">
+                    <li>
+
+                        <div class="group_material">
+                            <input type="text" name="gdgallery_video_name" id="gdgallery_video_name"
+                                   value="">
+                            <span class="highlight_material"></span>
+                            <span class="bar_material"></span>
+                            <label><?= _e('Title', 'gdgallery'); ?></label>
+                        </div>
                     </li>
                     <li>
-                        <label for="gdgallery_video_description">
-                            <?= _e('Description', 'gdgallery'); ?>: </label><br>
-                        <input type="text" id="gdgallery_video_description"
-                               name="gdgallery_video_description"
-                               value=""></li>
+
+                        <div class="group_material">
+                            <input type="text" name="gdgallery_video_description" id="gdgallery_video_description"
+                                   value="">
+                            <span class="highlight_material"></span>
+                            <span class="bar_material"></span>
+                            <label><?= _e('Description', 'gdgallery'); ?></label>
+                        </div>
+
+                    </li>
                     <li>
-                        <label for="gdgallery_video_link"> <?= _e('Link', 'gdgallery'); ?>:</label><br>
-                        <input type="text" name="gdgallery_video_link"
-                               id="gdgallery_video_link"
-                               value=""></li>
+                        <div class="group_material">
+                            <input type="text" name="gdgallery_video_link" id="gdgallery_video_link"
+                                   value="">
+                            <span class="highlight_material"></span>
+                            <span class="bar_material"></span>
+                            <label><?= _e('Link', 'gdgallery'); ?></label>
+                        </div>
+                    </li>
                 </ul>
 
                 <div class="video_save">

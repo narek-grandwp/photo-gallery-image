@@ -45,7 +45,7 @@ if (!class_exists('GDGallery')) :
         /**
          * The single instance of the class.
          *
-         * @var GDForm
+         * @var GDGallery
          */
         protected static $_instance = null;
 
@@ -56,7 +56,7 @@ if (!class_exists('GDGallery')) :
          *
          * @static
          * @see GDGALLERY()
-         * @return GDForm - Main instance.
+         * @return GDGallery - Main instance.
          */
         public static function instance()
         {
@@ -75,6 +75,7 @@ if (!class_exists('GDGallery')) :
                 'GDGallery\Database\Migrations\CreateGalleryTable',
                 'GDGallery\Database\Migrations\CreateImageTable',
                 'GDGallery\Database\Migrations\CreateSettingsTable',
+                'GDGallery\Database\Migrations\CreateIndividualSettingsTable',
                 'GDGallery\Database\Migrations\CreateDefaultGallery'
             );
 
@@ -167,6 +168,21 @@ if (!class_exists('GDGallery')) :
 
             foreach ($default_settings as $key => $value) {
                 $settings->setOption($key, $value);
+            }
+        }
+
+
+        public function setIndividualGallerySettings($id_galery)
+        {
+            $settings = new Settings();
+            $individual_settings = $settings->getIndividualOptions();
+            set_time_limit(100);
+
+            $i = 0;
+
+            foreach ($individual_settings as $key => $value) {
+                ++$i;
+                $settings->setIndividualOptionFields($key, $value, $id_galery, $i);
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace GDGallery\Controllers\Admin;
 
+use GDGallery\Debug;
 use GDGallery\Models\Gallery;
 use GDGallery\Models\Settings;
 use GDGallery\Core\Model;
@@ -71,7 +72,34 @@ class AjaxController
             $gallery->updateImageOrdering($ordering);
         }
 
-        $updated = $gallery->saveGallery($gallery_data_arr);
+        $ind_settings = array();
+        $gallery_data_new = array();
+
+        foreach ($gallery_data_arr as $key => $val) {
+            if (strpos($key, "ind_setting_") !== false) {
+                $ind_settings[str_replace("ind_setting_", "", $key)] = $val;
+            } else {
+                $gallery_data_new[$key] = $val;
+            }
+        }
+
+        $ind_settings["on_hover_overlay_justified"] = (isset($ind_settings["on_hover_overlay_justified"])) ? 1 : 0;
+        $ind_settings["on_hover_overlay_tiles"] = (isset($ind_settings["on_hover_overlay_tiles"])) ? 1 : 0;
+        $ind_settings["on_hover_overlay_carousel"] = (isset($ind_settings["on_hover_overlay_carousel"])) ? 1 : 0;
+        $ind_settings["on_hover_overlay_grid"] = (isset($ind_settings["on_hover_overlay_grid"])) ? 1 : 0;
+
+        $ind_settings["shadow_justified"] = (isset($ind_settings["shadow_justified"])) ? 1 : 0;
+        $ind_settings["shadow_tiles"] = (isset($ind_settings["shadow_tiles"])) ? 1 : 0;
+        $ind_settings["shadow_carousel"] = (isset($ind_settings["shadow_carousel"])) ? 1 : 0;
+        $ind_settings["shadow_grid"] = (isset($ind_settings["shadow_grid"])) ? 1 : 0;
+
+        $ind_settings["autoplay_slider"] = (isset($ind_settings["autoplay_slider"])) ? 1 : 0;
+        $ind_settings["playlist_slider"] = (isset($ind_settings["playlist_slider"])) ? 1 : 0;
+
+
+        $gallery->saveGalleryIndSettings($ind_settings, $gallery_data_new["id_gallery"]);
+        $updated = $gallery->saveGallery($gallery_data_new);
+
         if ($updated) {
             echo 1;
             die();

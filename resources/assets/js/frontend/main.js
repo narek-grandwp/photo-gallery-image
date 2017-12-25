@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
                         "data-description='" + item.description + "' data-videoid='" + item.video_id + "' style='display:block;'></a>")
                 });
 
-                jQuery("#gdgallery_container_" + g_id).hide();
+                // jQuery("#gdgallery_container_" + g_id).hide();
                 setTimeout(function () {
                     jQuery("#gdgallery_container_" + g_id).unitegallery(mainjs.options);
                     jQuery("#gdgallery_container_" + g_id).show();

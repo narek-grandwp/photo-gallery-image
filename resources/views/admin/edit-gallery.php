@@ -2,6 +2,7 @@
 /**
  * Template for edit gallery page
  * @var $gallery \GDGallery\Models\Gallery
+ * @var $settings \GDGallery\Models\Settings
  */
 
 use GDGallery\Controllers\Frontend\GalleryPreviewController as Preview;
@@ -28,6 +29,8 @@ $save_data_nonce = wp_create_nonce('gdgallery_nonce_save_data' . $id);
 $hidden_class = "gdgallery_hidden";
 $display_type_opt = (in_array($gallery_data->view_type, array(0, 1))) ? "" : $hidden_class;
 $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title == 1) ? "" : $hidden_class;
+
+$individuals = $settings->getOptionsByGalleryView($id, "");
 
 
 ?>
@@ -64,10 +67,7 @@ $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title
                 <div class="settings-toogled-container">
 
                     <ul class="gdgallery_tabs">
-                        <li class="Tabs__tab gdgallery_active_Tab gdgallery_Tab">
-                            <a href="#gdgallery_gallery_style"><?php _e('Gallery Style', 'gdgallery'); ?></a>
-                        </li>
-                        <li class="Tabs__tab gdgallery_Tab">
+                        <li class="Tabs__tab gdgallery_Tab gdgallery_active_Tab">
                             <a href="#gdgallery_general_settings"><?php _e('General Settings', 'gdgallery'); ?></a>
                         </li>
                         <li class="Tabs__tab gdgallery_Tab">
@@ -87,37 +87,53 @@ $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title
                         <span class="spinner"></span>
 
                     </ul>
-                    <div id="gdgallery_gallery_style" style="display: none;">
-                        <?php foreach ($gallery->getViewStyles() as $key => $view): ?>
-                            <div class="gdgallery_view_item <?php if ($gallery_data->view_type == $key) echo "checked_view" ?>">
-                                <label>
-                                    <p><?= $view[0] ?></p>
-                                    <input type="radio" <?php if ($gallery_data->view_type == $key) echo "checked" ?>
-                                           name="gdgallery_view_type" value="<?= $key ?>"/>
-                                    <img src="<?= $view[1] ?>">
-
-                                </label>
-                            </div>
-                        <?php endforeach; ?>
-
-                    </div>
                     <div id="gdgallery_general_settings">
-                        <div class="gallery_title_div">
-                            <input type="text" id="gallery_name" name="gdgallery_name"
-                                   value="<?php if ($gallery->getName() != "(no title)") echo $gallery->getName(); ?>"
-                                   placeholder="<?= _e('Name Your Gallery', 'gdgallery'); ?>">
+                        <div class="choose_view">
+                            <p class="view_label"><?php echo _e('Views', 'gdgallery'); ?></p>
+                            <div class="view_list">
+                                <?php foreach ($gallery->getViewStyles() as $key => $view): ?>
+                                    <div class="gdgallery_view_item <?php if ($gallery_data->view_type == $key) echo "checked_view" ?>">
+                                        <label>
+                                            <input type="radio" <?php if ($gallery_data->view_type == $key) echo "checked" ?>
+                                                   name="gdgallery_view_type" value="<?= $key ?>"/>
+                                            <?php if ($gallery_data->view_type == $key) { ?>
+                                                <img src="<?= $view[1] . "-hover.png" ?>" class="view_default_image">
+                                            <?php } else { ?>
+                                                <img src="<?= $view[1] . ".png" ?>" class="view_default_image">
+                                            <?php } ?>
+                                            <input type="hidden" class="hidden_icon_hover"
+                                                   value="<?= $view[1] . "-hover.png" ?>">
+                                            <input type="hidden" class="hidden_icon"
+                                                   value="<?= $view[1] . ".png" ?>">
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+
+                        <div class="group_material">
+                            <input type="text" name="gdgallery_name" id="gallery_name"
+                                   value="<?php if ($gallery->getName() != "(no title)") echo $gallery->getName(); ?>">
                             <input type="hidden" id="gdgallery_id_gallery" name="gdgallery_id_gallery"
                                    value="<?php echo $id; ?>">
-
+                            <span class="highlight_material"></span>
+                            <span class="bar_material"></span>
+                            <label><?= _e('Name Your Gallery', 'gdgallery'); ?></label>
                         </div>
                         <ul class="gdgallery_general_settings">
                             <?php if (isset($gallery_data->show_title)) { ?>
                                 <li class="gdgallery_show_title_section">
                                     <h4><?= _e('Show Gallery Title', 'gdgallery'); ?></h4>
-                                    <input type="checkbox" id="gdgallery_show_title"
-                                           name="gdgallery_show_title" <?php if ($gallery_data->show_title == 1) echo "checked"; ?>>
+
+                                    <div class="md-checkbox">
+                                        <input id="gdgallery_show_title" type="checkbox"
+                                               name="gdgallery_show_title" <?php if ($gallery_data->show_title == 1) echo "checked"; ?>>
+                                        <!-- Use label even if no text required -->
+                                        <label for="gdgallery_show_title"></label>
+                                    </div>
                                 </li>
-                                <li class="gdgallery_title_position_section <?php echo $show_title_opt; ?>">
+                                <li class="gdgallery_title_position_section group_material">
                                     <h4><?= _e('Gallery Title Position', 'gdgallery'); ?></h4>
                                     <select name="gdgallery_position" id="gdgallery_position">
                                         <option value="left" <?php if ($gallery_data->position == 'left') echo "selected" ?>>
@@ -132,7 +148,7 @@ $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title
                                     </select>
                                 </li>
                             <?php } ?>
-                            <li class="gdgallery_display_type_section <?= $display_type_opt ?>">
+                            <li class="gdgallery_display_type_section <?= $display_type_opt ?> group_material">
                                 <h4><?= _e('Content Display Type', 'gdgallery'); ?></h4>
                                 <select name="gdgallery_display_type" id="gdgallery_display_type">
                                     <option value="0" <?php if ($gallery_data->display_type == 0) echo "selected" ?>>
@@ -146,13 +162,13 @@ $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title
                                     </option>
                                 </select>
                             </li>
-                            <li class="gdgallery_items_per_page_section <?php if ($gallery_data->display_type == 0) echo "gdgallery_hidden" ?>  <?= $display_type_opt ?>">
+                            <li class="gdgallery_items_per_page_section <?= $display_type_opt ?> group_material">
                                 <h4>  <?= _e('Items Per Page', 'gdgallery'); ?></h4>
                                 <input type="number" min="0" max="100" name="gdgallery_items_per_page"
                                        id="gdgallery_items_per_page" class="gdgallery_items_per_page"
                                        value="<?= $gallery_data->items_per_page ?>">
                             </li>
-                            <li class="gdgallery_sorting_section">
+                            <li class="gdgallery_sorting_section group_material">
                                 <h4><?= _e('Image Sorting', 'gdgallery'); ?></h4>
                                 <select name="gdgallery_sort_by" id="gdgallery_sorting">
                                     <option value="0" <?php if ($gallery_data->sort_by == 0) echo "selected" ?>>
@@ -166,7 +182,7 @@ $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title
                                     </option>
                                 </select>
                             </li>
-                            <li class="gdgallery_ordering_section">
+                            <li class="gdgallery_ordering_section group_material">
                                 <h4><?= _e('Image order', 'gdgallery'); ?></h4>
                                 <select name="gdgallery_order_by" id="gdgallery_ordering">
                                     <option value="0" <?php if ($gallery_data->order_by == 0) echo "selected" ?>>
@@ -177,6 +193,9 @@ $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title
                                     </option>
                                 </select>
                             </li>
+                            <?php
+
+                            \GDGallery\Helpers\View::render('admin/gallery-settings.php', array("id_gallery" => $id, "individuals" => $settings->getOptionsByGalleryView($id, null), "view_type" => $gallery->getViewName($gallery_data->view_type))); ?>
 
                         </ul>
 
@@ -262,7 +281,7 @@ $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title
                     </li>
                     <?php
                     if (!empty($items)) {
-                        foreach ($items as $item):
+                        foreach ($items as $index => $item):
                             $icon = ($item->type == "youtube") ? "fa-youtube-play" : (($item->type == "vimeo") ? "fa-vimeo" : "fa-picture-o");
                             ?>
                             <li class="gdgallery_item" style="background-image: url('<?= $item->url ?>');">
@@ -273,12 +292,17 @@ $show_title_opt = (isset($gallery_data->show_title) && $gallery_data->show_title
                                 <p class="gdgallery_item_title"><?= $item->name ?>
                                     <i class="fa <?= $icon ?>" aria-hidden="true"></i></p>
                                 <div class="gdgallery_item_overlay">
-                                    <input type="checkbox" name="items[]"
-                                           value="<?= $item->id_image; ?>" class="items_checkbox"/>
+                                    <div class="md-checkbox">
+                                        <input type="checkbox" id="<?php echo "item-no-" . $index; ?>" name="items[]"
+                                               value="<?= $item->id_image; ?>" class="items_checkbox"/>
+                                        <label for="<?php echo "item-no-" . $index; ?>"></label>
+                                    </div>
                                     <div class="gdgallery_item_edit">
                                         <a href="<?php echo ($item->id_post != 0) ? admin_url() . "post.php?post=" . $item->id_post . "&action=edit&image-editor" : "#"; ?>"
                                            target="_blank" data-post-id="<?= $item->id_post ?>"
-                                           data-image-id="<?= $item->id_image ?>"> <?= _e('EDIT', 'gdgallery'); ?></a>
+                                           data-image-id="<?= $item->id_image ?>" title="Edit"><i
+                                                    class="fa fa-pencil"
+                                                    aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </li>

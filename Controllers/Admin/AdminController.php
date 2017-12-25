@@ -2,8 +2,10 @@
 
 namespace GDGallery\Controllers\Admin;
 
+use GDGallery\Debug;
 use GDGallery\Helpers\View;
 use GDGallery\Models\Gallery;
+use GDGallery\Models\Settings;
 
 
 class AdminController
@@ -105,8 +107,9 @@ class AdminController
                     }
 
                     $gallery = new Gallery(array('id_gallery' => $id));
+                    $settings = new Settings();
 
-                    View::render('admin/edit-gallery.php', array('gallery' => $gallery));
+                    View::render('admin/edit-gallery.php', array('gallery' => $gallery, "settings" => $settings));
 
                     break;
             }
@@ -172,6 +175,8 @@ class AdminController
             wp_die(__('Security check failed', GDGALLERY_TEXT_DOMAIN));
         }
 
+        $gallery = new Gallery(array('id_gallery' => $id));
+        $gallery->deleteGalleryIndSettings($id);
         Gallery::delete($id);
 
         $location = admin_url('admin.php?page=gdgallery');
@@ -258,6 +263,9 @@ class AdminController
         $gallery = new Gallery();
 
         $gallery = $gallery->setName('')->save();
+
+        GDGallery()->setIndividualGallerySettings($gallery);
+
 
         /**
          * after the gallery is created we need to redirect user to the edit page

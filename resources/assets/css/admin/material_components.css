@@ -1,0 +1,250 @@
+
+.container_material {
+    font-family: 'Roboto';
+    width: 600px;
+    margin: 30px auto 0;
+    display: block;
+    background: #FFF;
+    padding: 10px 50px 50px;
+}
+
+/* form starting stylings ------------------------------- */
+.group_material {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+div.group_material input {
+    font-size: 21px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+    box-shadow: none;
+}
+
+li.group_material input {
+    font-size: 17px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 125px;
+    border: none;
+    border-bottom: 1px solid #757575;
+    box-shadow: none;
+}
+
+.group_material input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* LABEL ======================================= */
+.group_material label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+.group_material input:focus ~ label, .group_material input:not([value=""]) ~ label {
+    top: -12px;
+    font-size: 14px;
+    color: #5f7df5;
+}
+
+/* BOTTOM BARS ================================= */
+.group_material .bar_material {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.group_material .bar_material:before, .group_material .bar_material:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5f7df5;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.group_material .bar_material:before {
+    left: 50%;
+}
+
+.group_material .bar_material:after {
+    right: 50%;
+}
+
+/* active state */
+.group_material input:focus ~ .bar_material:before, input:focus ~ .bar_material:after {
+    width: 50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight_material {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* active state */
+.group_material input:focus ~ .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: #5f7df5;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-moz-keyframes inputHighlighter {
+    from {
+        background: #5f7df5;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #5f7df5;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+.quick_edit_table div.group_material input {
+    font-size: 15px;
+    padding: 10px 10px 5px 5px;
+}
+
+.quick_edit_table .group_material .bar_material:before, .quick_edit_table .group_material .bar_material:after {
+    bottom: -37px;
+}
+
+/****************************   Select box   *******************************/
+/* ==========  Select Field Variables ========== */
+/* ==========  Select Field ========== */
+/* Style Select Field */
+.group_material select {
+    font-family: inherit;
+    background-color: transparent;
+    width: 125px;
+    padding: 4px 0;
+    font-size: 16px;
+    border: none;
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.12);*/
+}
+
+/* Remove focus */
+.group_material select:focus {
+    outline: none;
+}
+
+/* Use custom arrow */
+.group_material select {
+    /*-webkit-appearance: none;*/
+    /*-moz-appearance: none;*/
+    /*appearance: none;*/
+    /*box-shadow: 0px 3px 5px #e3d6d6;*/
+    padding-left: 1px;
+    box-shadow: none;
+    border-bottom: 1px solid #757575;
+}
+
+/* ==========  Demo CSS ========== */
+
+/****************************   Checkbox   *******************************/
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.md-checkbox {
+    position: relative;
+    margin: 16px 0;
+    float: right;
+    width: 125px;
+}
+
+.md-checkbox label {
+    cursor: pointer;
+}
+
+.md-checkbox label:before, .md-checkbox label:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.md-checkbox label:before {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid rgba(184, 184, 184, 0.54);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .3s;
+}
+
+.md-checkbox input[type="checkbox"] {
+    outline: 0;
+    margin-right: 10px;
+    display: none;
+}
+
+.md-checkbox input[type="checkbox"]:checked + label:before {
+    background: #5f7df5;
+    border: none;
+}
+
+.md-checkbox input[type="checkbox"]:checked + label:after {
+    transform: rotate(-45deg);
+    top: 5px;
+    left: 4px;
+    width: 12px;
+    height: 6px;
+    border: 2px solid #fff;
+    border-top-style: none;
+    border-right-style: none;
+}
+
+.gdgallery_item_overlay .md-checkbox {
+    position: relative;
+    margin: 0px;
+    float: right;
+    width: 150px;
+}
+
+.gdgallery_item_overlay .md-checkbox label:before {
+    background: transparent;
+}

@@ -39,7 +39,7 @@ switch ($page_nav_type) {
 
 
     $pervpage = '';
-    if ($page != 1 && $page_nav_type != 2) {
+    if ($page > 1 && $page_nav_type != 2) {
         if (isset($navigation[0]) && $navigation[0] != "") {
             $pervpage .= '<a href= ' . $checkREQ . '=1 class="gdgallery-pagination-icon gdgallery-pagination-icon-first">' . $navigation[0] . '</a>';
         }
@@ -51,6 +51,10 @@ switch ($page_nav_type) {
     $cur_page = (isset($_GET["gdgallery-page"])) ? intval($_GET["gdgallery-page"]) : 1;
     if ($cur_page <= 0) {
         $cur_page = 1;
+    }
+
+    if ($cur_page > $gallery_data->total) {
+        $cur_page = $gallery_data->total;
     }
     $page_numbers = '';
     $nearby = (isset($page_options["nearby"]) && $page_options["nearby"] != "") ? $page_options["nearby"] : $gallery_data->total;
@@ -65,7 +69,7 @@ switch ($page_nav_type) {
     }
 
     $nextpage = '';
-    if ($page != $gallery_data->total && $page_nav_type != 2) {
+    if ($page < $gallery_data->total && $page_nav_type != 2) {
         if (isset($navigation[2]) && $navigation[2] != "") {
             $nextpage .= ' <a href= ' . $checkREQ . '=' . ($page + 1) . ' class="gdgallery-pagination-icon gdgallery-pagination-icon-next">' . $navigation[2] . '</a>';
         }
