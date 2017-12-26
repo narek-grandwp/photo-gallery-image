@@ -9,6 +9,20 @@
 $section = null;
 
 
+$pro_options = array(
+    "on_hover_overlay_justified",
+    "image_hover_effect_justified",
+    "on_hover_overlay_tiles",
+    "image_hover_effect_tiles",
+    "on_hover_overlay_carousel",
+    "image_hover_effect_carousel",
+    "on_hover_overlay_grid",
+    "image_hover_effect_grid",
+    "playlist_slider",
+    "playlist_pos_slider"
+);
+
+
 foreach ($individuals as $key => $val) {
     if ($key >= 0 && $key < 7) {
         $section = 'justified_section_ind section_individual';
@@ -37,11 +51,23 @@ foreach ($individuals as $key => $val) {
         }
     }
 
+
+    if (in_array($val->option_key, $pro_options)) {
+        $disabled = " disabled ";
+        $pro_label = " pro_label ";
+    } else {
+        $disabled = "";
+        $pro_label = "";
+    }
+
+    $pro_class = (in_array($val->option_key, $pro_options)) ? " disabled pro_label " : "";
+
     $material = ($val->option_type != "checkbox") ? " group_material" : "";
 
-    echo "<li class='" . $section . $material . " ' id='ind_setting_" . $val->option_key . "_section'>";
+    echo "<li class='" . $section . $material . $disabled . " ' id='ind_setting_" . $val->option_key . "_section'>";
     ?>
-    <h4><?php echo $val->option_title; ?></h4>
+    <h4><?php echo $val->option_title;
+        if ($pro_label) { ?>  <span class="<?php echo $pro_label; ?>">PRO</span> <?php } ?></h4>
     <?php
     switch ($val->option_type) {
         case "select":

@@ -1340,7 +1340,7 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .gdgallery_general_settings h4 {
-    margin: 14px 0px;
+    margin: 19px 0px;
     display: inline-block;
 }
 
@@ -1900,6 +1900,15 @@ ul.gdgallery_general_settings {
 .gdgallery_general_settings li input[type=checkbox] {
     position: relative;
     top: 6px;
+}
+
+.pro_label{
+    color: #FFFFFF;
+    background: #ef3326;
+    padding: 3px 4px;
+    border-radius: 3px;
+    margin-left: 3px;
+    font-size: 11px;
 }
 
 #wpbody-content *:not(i) {

@@ -365,7 +365,7 @@ class Settings
     private $individualOptions = array(
         "show_title_justified" => array("1", "Element Title Option", "select", "0,1,2", "Always on,On hover,Disable"),
         "title_appear_type_justified" => array("slide", "Title On Hover Type", "select", "slide,fade", "Slide,Fade"),
-        "on_hover_overlay_justified" => array("b:1;", "On Hover Overlay", "checkbox", null, null),
+        "on_hover_overlay_justified" => array("b:0;", "On Hover Overlay", "checkbox", null, null),
         "image_hover_effect_justified" => array("blur", "Image Hover Effect", "select", "blur,bw,sepia", "None,Black and White,Sepia"),
         "margin_justified" => array("10", "Image Margin", "number", null, null),
         "border_width_justified" => array("1", "Image Border Width", 'number', null, null),
@@ -373,7 +373,7 @@ class Settings
 
         "show_title_tiles" => array("1", "Element Title Option", "select", "0,1,2", "Always on,On hover,Disable"),
         "title_appear_type_tiles" => array("slide", "Title On Hover Type", "select", "slide,fade", "Slide,Fade"),
-        "on_hover_overlay_tiles" => array("b:1;", "On Hover Overlay", "checkbox", null, null),
+        "on_hover_overlay_tiles" => array("b:0;", "On Hover Overlay", "checkbox", null, null),
         "image_hover_effect_tiles" => array("blur", "Image Hover Effect", "select", "blur,bw,sepia", "None,Black and White,Sepia"),
         "margin_tiles" => array("10", "Image Margin", "number", null, null),
         "border_width_tiles" => array("1", "Image Border Width", 'number', null, null),
@@ -382,7 +382,7 @@ class Settings
 
         "show_title_carousel" => array("1", "Element Title Option", "select", "0,1,2", "Always on,On hover,Disable"),
         "title_appear_type_carousel" => array("slide", "Title On Hover Type", "select", "slide,fade", "Slide,Fade"),
-        "on_hover_overlay_carousel" => array("b:1;", "On Hover Overlay", "checkbox", null, null),
+        "on_hover_overlay_carousel" => array("b:0;", "On Hover Overlay", "checkbox", null, null),
         "image_hover_effect_carousel" => array("blur", "Image Hover Effect", "select", "blur,bw,sepia", "None,Black and White,Sepia"),
         "margin_carousel" => array("10", "Image Margin", "number", null, null),
         "border_width_carousel" => array("1", "Image Border Width", 'number', null, null),
@@ -392,7 +392,7 @@ class Settings
 
         "show_title_grid" => array("1", "Element Title Option", "select", "0,1,2", "Always on,On hover,Disable"),
         "title_appear_type_grid" => array("slide", "Title On Hover Type", "select", "slide,fade", "Slide,Fade"),
-        "on_hover_overlay_grid" => array("b:1;", "On Hover Overlay", "checkbox", null, null),
+        "on_hover_overlay_grid" => array("b:0;", "On Hover Overlay", "checkbox", null, null),
         "image_hover_effect_grid" => array("blur", "Image Hover Effect", "select", "blur,bw,sepia", "None,Black and White,Sepia"),
         "space_cols_grid" => array("10", "Image Margin", "number", null, null),
         "border_width_grid" => array("1", "Image Border Width", 'number', null, null),
@@ -406,7 +406,7 @@ class Settings
         "play_interval_slider" => array("5000", "Autoplay Timeout (ms)", "number", null, null),
         "transition_speed_slider" => array("1000", "Transition Speed (ms)", "number", null, null),
         "transition_slider" => array("slide", "Effects", "select", "slide,fade", "Slide,Fade"),
-        "playlist_slider" => array("b:1;", "Playlist", "checkbox", null, null),
+        "playlist_slider" => array("b:0;", "Playlist", "checkbox", null, null),
         "playlist_pos_slider" => array("right", "Playlist Position", "select", "right,left,bottom,top", "Right,Left,Bottom,Top", null, null)
     );
 
