@@ -1353,11 +1353,14 @@ html .ui-button.ui-state-disabled:active {
 
 #gdgallery_general_settings ul li {
     display: block;
-    flex-basis: 22%;
+    flex-basis: 25%;
     width: 96%;
     background: #fff;
     /*border: 2px solid #e0e0e0;*/
-    margin: 0 1.5% 15px 1.5%;
+    /*margin: 0 1.5% 15px 1.5%;*/
+    margin: 0px;
+    border-right: 1px solid #f1f1f1;
+    border-left: 1px solid #f1f1f1;
 }
 
 #gdgallery_edit_name {
@@ -1902,7 +1905,7 @@ ul.gdgallery_general_settings {
     top: 6px;
 }
 
-.pro_label{
+.pro_label {
     color: #FFFFFF;
     background: #ef3326;
     padding: 3px 4px;
@@ -1986,6 +1989,18 @@ ul.gdgallery_general_settings {
 
     .right-col {
         width: 45%;
+    }
+}
+
+@media all and (max-width: 1555px) {
+    #gdgallery_general_settings ul li {
+        flex-basis: 33.333%;
+    }
+}
+
+@media all and (max-width: 1242px) {
+    #gdgallery_general_settings ul li {
+        flex-basis: 50%;
     }
 }
 
