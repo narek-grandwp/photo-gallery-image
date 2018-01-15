@@ -40,7 +40,7 @@ class CreateIndividualSettingsTable
                 `id_option` int(11) UNSIGNED NOT NULL,
                 `option_value` TEXT,
                 PRIMARY KEY (id),
-                UNIQUE KEY `unique_index` (`id`,`id_gallery`, `id_option`),
+                UNIQUE KEY `unique_index` (`id_gallery`, `id_option`),
 				FOREIGN KEY (id_gallery) REFERENCES " . Gallery::getTableName() . " (id_gallery) ON DELETE CASCADE,
 				FOREIGN KEY (id_option) REFERENCES " . $wpdb->prefix . "gdgalleryindividualsettingslist (id) ON DELETE CASCADE
             ) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci "
