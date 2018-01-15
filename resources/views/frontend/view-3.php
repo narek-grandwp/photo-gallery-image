@@ -7,14 +7,8 @@
 $gallery_options = array();
 
 $gallery_options["gallery_images_preload_type"] = "minimal";
-//$gallery_options["gallery_width"] = $options["width_slider"];
-//$gallery_options["gallery_height"] = $options["height_slider"];
-//$gallery_options["gallery_autoplay"] = $options["autoplay_slider"];
-//$gallery_options["gallery_play_interval"] = $options["play_interval_slider"];
 $gallery_options["gallery_pause_on_mouseover"] = $options["pause_on_hover_slider"];
 $gallery_options["slider_scale_mode"] = $options["scale_mode_slider"];
-//$gallery_options["slider_transition"] = $options["transition_slider"];
-//$gallery_options["slider_transition_speed"] = (int)$options["transition_speed_slider"];
 
 $gallery_options["slider_loader_type"] = (int)$options["loader_type_slider"];
 $gallery_options["slider_loader_color"] = $options["loader_color_slider"];
