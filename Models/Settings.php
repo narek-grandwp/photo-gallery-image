@@ -420,14 +420,21 @@ class Settings
 
         $option_name = sanitize_text_field($option_name);
 
-        $wpdb->insert($this->individualOptionsListTable, array(
-            "id" => $id,
-            "option_key" => $option_name,
-            "option_title" => $option_value[1],
-            "option_type" => $option_value[2],
-            "select_options_val" => $option_value[3],
-            "select_options_title" => $option_value[4],
-        ));
+        $saved = $wpdb->query(
+            $wpdb->prepare(
+                'INSERT IGNORE INTO ' . $this->individualOptionsListTable . ' (id,option_key,option_title,option_type,select_options_val,select_options_title) VALUES(%s,%s,%s,%s,%s,%s)',
+                $id, $option_name, $option_value[1], $option_value[2], $option_value[3], $option_value[4]
+            )
+        );
+
+        /* $wpdb->insert($this->individualOptionsListTable, array(
+             "id" => $id,
+             "option_key" => $option_name,
+             "option_title" => $option_value[1],
+             "option_type" => $option_value[2],
+             "select_options_val" => $option_value[3],
+             "select_options_title" => $option_value[4],
+         ));*/
 
 
         $this->setIndividualOptionValues($id_gallery, $id, $option_value[0]);
@@ -442,11 +449,17 @@ class Settings
 
         $option_value = sanitize_text_field($option_value);
 
-        $saved = $wpdb->insert(Gallery::getIndividualSettingsTableName(), array(
-            "id_gallery" => $id_gallery,
-            "id_option" => $id_option,
-            "option_value" => $option_value
-        ));
+        $saved = $wpdb->query(
+            $wpdb->prepare(
+                'INSERT IGNORE INTO ' . Gallery::getIndividualSettingsTableName() . ' (id_gallery,id_option,option_value) VALUES(%s,%s,%s)', $id_gallery, $id_option, $option_value
+            )
+        );
+
+        /* $saved = $wpdb->insert(Gallery::getIndividualSettingsTableName(), array(
+             "id_gallery" => $id_gallery,
+             "id_option" => $id_option,
+             "option_value" => $option_value
+         ));*/
 
         if ($saved !== false) {
             return true;
